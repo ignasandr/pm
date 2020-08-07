@@ -162,12 +162,17 @@ Priskirti darbuotoją projekui -->
                             <td> <?php print(htmlspecialchars($item["name"])); ?> </td>
                             <td> <?php print(getNames(search($projectstaff, $fkey, $item["id"]), $list2 ,$pkey)); ?> </td>
                             <td>
-                                <form method='post' action=''>
+                                <form method='post' action='' style="display:inline-block">
                                     <input type='hidden' name='id' value='<?php print(htmlspecialchars($item["id"])); ?>'/>
                                     <input type='hidden' name='table' value='<?php print($table); ?>'/>
-                                    <!-- <button id='update-item' class='waves-effect waves-light btn modal-trigger' name='update' type='submit' data-target='modal1'>update</button>  -->
                                     <button id='delete-item' class='waves-effect waves-light btn red lighten-1' name='delete' type='submit'>delete</button> 
                                 </form>
+                                    <!-- <button id='update-item' class='waves-effect waves-light btn modal-trigger' name='update' type='submit' data-target='modal1'>update</button>  -->
+                                    <button class='btn open-modal'
+                                            style='display: inline-block'
+                                            data-id='<?php print(htmlspecialchars($item["id"])); ?>'
+                                            data-table='<?php print($table); ?>'
+                                            >update</button>
                             </td>
                         </tr>
                 <?php endforeach; ?>
@@ -185,7 +190,18 @@ Priskirti darbuotoją projekui -->
                     <i class="material-icons left">add</i>
                 </button>
             </form>
+
+            <!-- Modal Structure -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-close waves-effect waves-green btn-flat">cancel</a>
+                </div>
+            </div>
+
         </div>
     </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="actions.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>
