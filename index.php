@@ -45,6 +45,21 @@ Priskirti darbuotoją projekui -->
         $conn -> query($sql);
     }
 
+    if(isset($_POST['update_project'])) {
+        $name_to_update = $_POST['update_name'];
+        $to_table = $_POST['table'];
+        $id = $_POST['id'];
+
+        $sql = "UPDATE $to_table SET name='$name_to_update' WHERE id=$id";
+        
+        $conn -> query($sql);
+        // if (mysqli_query($conn, $sql)) {
+        //     echo "Record updated successfully";
+        // } else {
+        // echo "Error updating record: " . mysqli_error($conn);
+        // }
+    }
+
     // write query for all projects
     $sql = 'SELECT id, name FROM projects ORDER BY id';
 
@@ -172,6 +187,7 @@ Priskirti darbuotoją projekui -->
                                             style='display: inline-block'
                                             data-id='<?php print(htmlspecialchars($item["id"])); ?>'
                                             data-table='<?php print($table); ?>'
+                                            data-name='<?php print(htmlspecialchars($item["name"])); ?>'
                                             >update</button>
                             </td>
                         </tr>
@@ -192,16 +208,12 @@ Priskirti darbuotoją projekui -->
             </form>
 
             <!-- Modal Structure -->
-            <div id="modal1" class="modal">
-                <div class="modal-content">
-                </div>
-                <div class="modal-footer">
-                    <button class="modal-close waves-effect waves-green btn-flat">cancel</a>
-                </div>
+            <div id="modal1" class="modal" style="overflow-y: visible"> 
             </div>
 
         </div>
     </body>
-    <script src="actions.js"></script>
+    <script type="text/javascript"> var projects = <?php echo json_encode($projects); ?>;</script>
+    <script src="actions.js"> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>
